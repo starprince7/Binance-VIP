@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .card {
+    @apply rounded-md p-6 w-full my-6 shadow-sm bg-gray-50 text-gray-400 border border-gray-100
+  }
+  .input_field {
+    @apply my-5 space-y-1
+  }
+  .container {
+    @apply max-w-7xl mx-auto px-2 md:px-5
+  }
+  .divider {
+    @apply border-t border-gray-200 my-3 w-full
+  }
+  .btn {
+    @apply px-3 py-1.5 font-bold md:p-3 text-xs md:text-sm bg-gray-100 rounded-md outline-none
+  }
+  .table_header {
+    @apply font-bold text-gray-400 text-xs
+  }
+  .link_tab {
+    @apply flex space-x-2 items-center ease-in duration-100 px-5 py-4 hover:text-gray-700 hover:bg-gray-100 hover:border-l-2 hover:border-primary hover:px-4 cursor-pointer
+  }
+  .anchor_link {
+    @apply inline-flex space-x-2
+  }
+  .sidebar_icon {
+    @apply h-5
+  }
+  .list_item {
+    @apply flex flex-col md:flex-row py-3 items-start justify-between my-5
+  }
+  .list_header {
+    @apply inline-flex items-start max-w-sm text-gray-900
+  }
+  .list_number_container {
+    @apply border-[0.6px] border-[#f0b90b7d] rounded-full p-0.5 mr-3
+  }
+  .list_number {
+    @apply inline-block bg-primary2 rounded-full px-2  text-white font-semibold border border-primary2
+  }
+  .list_text_content {
+    @apply text-gray-500 text-sm my-5 md:my-0 ml-12 md:ml-0 max-w-2xl
+  }
+}
+
+.banner {
+  background-image: url('./../public/bg-web.png');
+  width: 100%;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: 140% 110%;
+  background-position: 50% -30px;
+}
+
+@media only screen and (max-width: 576px) {
+  .banner {
+    background-image: url('./../public/bg-phone.png');
+    background-size: 130%;
+    background-position: center;
+    min-height: 300px;
+    height: auto;
+    box-sizing: border-box;
+  }  
+}
