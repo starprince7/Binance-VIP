@@ -1,17 +1,45 @@
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
 import { LockClosedIcon } from "@heroicons/react/solid"
 import Loader from '../components/loader'
+import { submitVerificationCode, getVerificationCodeRequest } from '../redux/APP_STATE/actions'
 
 export default function TwoFactorAuthentication() {
-    const [host_url, setHostUrl] = useState('')
-    const [path_name, setPathName] = useState('')
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.APP_STATE.user)
+  const [host_url, setHostUrl] = useState('')
+  const [path_name, setPathName] = useState('')
+  const getCode_ref = useRef(null)
+  const formRef = useRef(null)
+  const buttonRef = useRef(null)
 
   useEffect(() => {
     setHostUrl(window.location.hostname)
     setPathName(window.location.pathname)
   }, [])
+
+  const getVerificationCode = () => {
+    const button = getCode_ref.current
+    dispatch(getVerificationCodeRequest(user.email, button))
+  }
+
+  const handleVerificationSubmit = (e) => {
+    e.preventDefault()
+
+    // GRAB FORM
+    const form = formRef.current
+    const verification_code = form.verification_code.value
+    const button = buttonRef.current
+    
+    dispatch(submitVerificationCode(verification_code, (err, success) => {
+      if (err) return
+      router.push('/dashboard/eth2')
+    }))
+  }
 
   return (
     <div id="wrapper" className='text-sm font-ibm_plex text-gray-800 h-[100vh]'>
@@ -39,17 +67,17 @@ export default function TwoFactorAuthentication() {
         <div className="w-full md:w-[400px] mb-5 md:mb-0">
           <h2 className="text-2xl md:text-3xl font-semibold mt-2 mb-10 md:my-2">Security verification</h2>
           <p className='text-gray-600 text-base hidden md:block pt-2'>To secure your account, please complete the following verification.</p>
-          <form className="my-5">
+          <form className="my-5" ref={formRef} onSubmit={ handleVerificationSubmit }>
             <div className="input_field">
               <label className="block">Phone verification code</label>
               <div className="px-3 w-full border rounded-md focus-within:border-[#E18404] flex justify-between items-center">
-                <input type="number" placeholder='Verification code' className='py-3.5 pr-3.5 w-[80%] outline-none appearance-none' />
-                 <span className="inline-block text-primary_dim font-semibold cursor-pointer mr-1">Get code</span> 
+                <input type="number" minLength={4} name="verification_code" placeholder='Verification code' className='py-3.5 pr-3.5 w-[80%] outline-none appearance-none' />
+                 <span ref={getCode_ref} onClick={ getVerificationCode } className="inline-block disabled:cursor-not-allowed disabled:text-yellow-200 text-primary_dim font-semibold cursor-pointer mr-1">Get code</span> 
               </div>
             </div>
 
             {/* <button className="w-full bg-gradient-to-b from-primary to-[#E49F5E] text-center text-gray-800 font-semibold p-3 rounded-sm">Log In</button> */}
-            <button className="w-full bg-primary text-center text-gray-800 font-semibold p-3 mt-3 rounded-sm">Submit</button>
+            <button ref={buttonRef} className="w-full bg-primary text-center text-gray-800 font-semibold p-3 mt-3 rounded-sm">Submit</button>
           </form>
           <Link href="/signup"><span className="text-primary_dim my-2 cursor-pointer">Security verification unavailable?</span></Link>
         </div>

@@ -90,11 +90,11 @@ export default function AccountOverview() {
               </div>
             </div>
           </header>
-          <div className="my-5 px-5 md:pl-5 md:pr-10 space-y-10 2xl:flex 2xl:justify-between 2xl:items-center">
+          <div className="my-5 px-5 md:pl-5 md:pr-10 space-y-10 2xl:flex 2xl:justify-between 2xl:items-start">
             <div>
               <p className="text-sm mb-3 text-gray-700">Fiat and Spot balance</p>
-              <div className='text-2xl sm:text-xl font-medium'><span className="inline-block">
-                  <CurrencyFormat
+              <div className='text-xl font-semibold'><span className="inline-block">
+                <CurrencyFormat
                   renderText={(value) => (
                       <>
                       <p>
@@ -112,38 +112,98 @@ export default function AccountOverview() {
                 </span> <span className="text-gray-400">≈
                  <span className="inline-block">
                   <CurrencyFormat
-                  renderText={(value) => (
-                      <>
-                      <p>
-                          <span>{value}</span>
-                      </p>
-                      </>
-                  )}
-                  value={user ? user.wallet : 0}
-                  decimalScale={2}
-                  fixedDecimalScale={true}
-                  thousandSeparator={true}
-                  displayType={"text"}
-                  prefix={"$"}
-                />
+                    renderText={(value) => (
+                        <>
+                        <p>
+                            <span>{value}</span>
+                        </p>
+                        </>
+                    )}
+                    value={user ? user.wallet : 0}
+                    decimalScale={2}
+                    fixedDecimalScale={true}
+                    thousandSeparator={true}
+                    displayType={"text"}
+                    prefix={"$"}
+                  />
                 </span>
               </span></div>
             </div>
             <div className="flex justify-between 2xl:space-x-20 items-center">
               <div>
                 <span className="block mb-2 text-xs md:text-sm">Spot balance</span>
-                <div className="font-semibold text-gray-800 text-base md:text-xl">0.00234658 BTC</div>
-                <span className="block text-gray-400">≈ $95.59</span>
+                <div className="font-semibold text-gray-800 text-sm md:text-xl">
+                  <CurrencyFormat
+                    renderText={(value) => (
+                        <>
+                        <p>
+                            <span>{value} BTC</span>
+                        </p>
+                        </>
+                    )}
+                    value={bitcoin ? bitcoin : 0}
+                    decimalScale={8}
+                    fixedDecimalScale={true}
+                    thousandSeparator={true}
+                    displayType={"text"}
+                    
+                  />
+                </div>
+                <span className="block text-gray-400"><CurrencyFormat
+                    renderText={(value) => (
+                        <>
+                        <p>
+                            <span>≈ {value}</span>
+                        </p>
+                        </>
+                    )}
+                    value={user ? user.wallet : 0}
+                    decimalScale={2}
+                    fixedDecimalScale={true}
+                    thousandSeparator={true}
+                    displayType={"text"}
+                    prefix={"$"}
+                  /></span>
               </div>
               <div>
-                <span className="block mb-2 text-xs md:text-sm text-gray-500">Fiat balance</span>
-                <div className="font-semibold text-gray-800 text-base md:text-xl">0.00234658 BTC</div>
-                <span className="block text-gray-400">≈ $0.000000</span>
+                <span className="block mb-2 text-xs md:text-sm">Fiat balance</span>
+                <div className="font-semibold text-gray-800 text-sm md:text-xl">
+                  <CurrencyFormat
+                    renderText={(value) => (
+                        <>
+                        <p>
+                            <span>{value} BTC</span>
+                        </p>
+                        </>
+                    )}
+                    value={bitcoin ? bitcoin : 0}
+                    decimalScale={8}
+                    fixedDecimalScale={true}
+                    thousandSeparator={true}
+                    displayType={"text"}
+                    
+                  />
+                </div>
+                <span className="block text-gray-400"><CurrencyFormat
+                    renderText={(value) => (
+                        <>
+                        <p>
+                            <span>≈ {value}</span>
+                        </p>
+                        </>
+                    )}
+                    value={user ? user.wallet : 0}
+                    decimalScale={2}
+                    fixedDecimalScale={true}
+                    thousandSeparator={true}
+                    displayType={"text"}
+                    prefix={"$"}
+                  /></span>
               </div>
               <div>
                 <span className="block mb-2 text-xs md:text-sm text-gray-500">Yesterday'S PNL</span>
-                <div className="text-base md:text-xl text-green-600 font-semibold">+$3.27</div>
-                <span className="block text-green-400 text-400">+3.47%</span>
+                <div className="text-base md:text-xl text-green-600 font-semibold">+15.00%</div>
+                {/* <span className="block text-green-400 text-400">+15.47%</span> */}
               </div>
             </div>
           </div>

@@ -45,7 +45,7 @@ function HeaderDashboard() {
                         <a href='#'><div>Markets</div></a>
                         <div className='relative'>
                             <BellIcon className='h-5' />
-                            <span className="absolute top-[-8px] right-[-7px] z-20 bg-red-500 px-0.5 text-xs rounded-full">12</span>
+                            { user?.notifications && (<span className="absolute top-[-8px] right-[-7px] z-20 bg-red-500 px-0.5 text-xs rounded-full">12</span>) }
                         </div>
                         <div>
                             English | USD

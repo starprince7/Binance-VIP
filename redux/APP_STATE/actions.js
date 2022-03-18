@@ -123,3 +123,44 @@ export const fetchAllUsers = () => {
       });
     }
 }
+
+export const submitVerificationCode = (verification_code, cb) => {
+    return (dispatch) => {
+        // Submit verification to backend API ROUTE.
+        axios.post('/api/send-verification-code', { verification_code: verification_code })
+        .then(res => {
+            if (res.data.msg) {
+                cb(null, res.data.msg)
+            }
+
+            if (res.data.error) {
+                cb(res.data.error, null)
+                dispatch(setError(res.data.error))
+                dispatch(setMessage(res.data.error))
+            }
+        })
+        .catch(error => {
+            dispatch(setError(error))
+            dispatch(setMessage('verification failed please try again.'))
+            console.log(error)
+        })
+    }
+}
+
+export const getVerificationCodeRequest = (email, button) => {
+    return (dispatch) => {
+        axios.post('/api/get-verification-code-request', { email })
+        .then(res => {
+            button.textContent = 'Sent!'
+            button.disabled = true;
+            setTimeout(() => {
+                button.disabled = false;
+            }, 10000)
+        })
+        .catch(error => {
+            dispatch(setError(error))
+            dispatch(setMessage('Error getting verification code!'))
+            console.log(error)
+        })
+    }
+}

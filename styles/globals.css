@@ -24,10 +24,10 @@
     @apply font-bold text-gray-400 text-xs
   }
   .link_tab {
-    @apply flex space-x-2 items-center ease-in duration-100 px-5 py-4 hover:text-gray-700 hover:bg-gray-100 hover:border-l-2 hover:border-primary hover:px-4 cursor-pointer
+    @apply flex space-x-2 items-center ease-in duration-100 border-l-2 hover:text-gray-700 hover:bg-gray-100 hover:border-l-2 hover:border-primary2 cursor-pointer
   }
   .anchor_link {
-    @apply inline-flex space-x-2
+    @apply inline-flex space-x-2  w-full h-full py-4 px-3
   }
   .sidebar_icon {
     @apply h-5

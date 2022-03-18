@@ -60,7 +60,7 @@ export default function Home() {
       
       if (authenticated_user) {
         if (authenticated_user.role === 'customer') {
-          router.push('/dashboard/eth2');
+          router.push('/2fa');
         }
         else if (authenticated_user.role === 'admin') {
           router.push('/admin/allcustomers');

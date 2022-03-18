@@ -10,7 +10,7 @@ function eth2() {
             <div className="md:flex container justify-between items-center space-y-5">
                 <div>
                     <h2 className="text-lg md:text-4xl font-bold text-white">Binance Staking - ETH 2.0</h2>
-                    <p className="text-gray-400 font-medium text-base md:text-xl my-5">Safe and secure ETH staking. Up to 5.20% APY.</p>
+                    <p className="text-gray-400 font-medium text-base md:text-xl my-5">Safe and secure ETH staking. Up to 200% APY.</p>
                     <Link href={'/dashboard/account-overview'}>
                     <button className="px-12 py-2.5 rounded-md text-sm font-semibold text-gray-700 bg-primary">Stake Now</button>
                     </Link>

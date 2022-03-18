@@ -113,7 +113,7 @@ export default function Invoice() {
               <label className="block">Payment method</label>
               <div className="px-3 w-full border rounded-md focus-within:border-[#E18404] flex justify-between items-center">
                 {/* <input type="number" placeholder='e.g 1000 USD' className='py-3.5 pr-3.5 w-[80%] outline-none appearance-none' /> */}
-                <select onChange={ handle_payment_method }  className='select py-3.5 pr-3.5 w-full outline-none' >
+                <select onChange={ handle_payment_method }  className='select py-3.5 pr-3.5 w-full outline-none appearance-none' >
                     <option value="">Select</option>
                     <option selected value="btc">Bitcoin (BTC)</option>
                     <option value="eth">Ethereum (ETH)</option>
