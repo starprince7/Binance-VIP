@@ -31,10 +31,10 @@ export default function AdminAllCustomers() {
 
     if (isTrue) {
         try {
-          const res = await axios.post('/api/delete_account', { id: id})
+          const res = await axios.post('/api/delete-user-account', { id: id})
           // res && console.log('Delete Account Done', res.data)
           res && dispatch(setMessage(res.data.msg))
-          res && window.location.reload()
+          res && dispatch(fetchAllUsers())
         }
         catch (e) {
           dispatch(setMessage('Something went wrong! couldn\'t delete account'))

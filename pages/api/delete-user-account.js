@@ -17,8 +17,7 @@ const databaseOptions = {
 export default async (req, res) => {
     if(req.method === 'GET') return res.status(201).json({msg: 'POST REQUEST ONLY!'})
     console.log("The POST request for --- - /api/delete-user-account - ---");
-    
-    
+    const id = req.body.id
 
     try {
         // WAIT FOR DATABASE CONNECTION.

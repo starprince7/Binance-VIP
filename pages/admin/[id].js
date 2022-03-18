@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import axios from 'axios'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 import CurrencyFormat from "react-currency-format";
 import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,6 +14,7 @@ export default function AdminAllCustomers() {
   const [user, setUser] = useState(null)
   const submit_form = useRef(null)
   const button_ref = useRef(null)
+  const router = useRouter()
 
   useEffect( async () => {
     getCustomerInfo()
@@ -31,9 +32,10 @@ export default function AdminAllCustomers() {
     const isTrue = window.confirm('Are you sure, confirm to delete this customer')
     if (isTrue) {
         try {
-            const res = await axios.post('/api/delete-user-account', { id: data._id })
+            const res = await axios.post('/api/delete-user-account', { id: user._id })
             res && console.log('Delete Account Done', res.data)
             res && dispatch(setMessage(res.data.msg))
+            router.push('/admin/all-customers')
         }
         catch (e) {
             console.log('ERR couldn\'t Delete Account')
