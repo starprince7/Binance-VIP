@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import mongoose from 'mongoose';
-import Customer from "../../model/Customer";
+import Customer from "../../model/customer";
 import { DATABASE_URI } from "../../utils/database"
 import { sendEmailToAdmin } from "../../utils/mailer"
 
