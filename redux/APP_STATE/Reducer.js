@@ -10,7 +10,6 @@ const initState = {
 }
 
 const appReducer = (state = initState, action) => {
-    console.log("Action That came In: ", action)
     switch(action.type) {
         case SET_ERROR : {
             return {

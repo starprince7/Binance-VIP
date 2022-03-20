@@ -29,7 +29,7 @@ function SideBar() {
                 </Link>
             </li>
             <li className="link_tab">
-                <Link href="#">
+                <Link href="/dashboard/withdrawal">
                   <a className='anchor_link'>
                     <AccountBalanceRounded className="sidebar_icon" />
                     <p>Withdraw</p>

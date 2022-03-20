@@ -85,7 +85,7 @@ export default function AccountOverview() {
               <div className='text-2xl md:text-3xl text-gray-900 font-semibold'>Fiat and Spot <img src="/binance-diamond-logo.svg" alt="icon" className='h-5 mr-1 text-primary2 inline-block' /></div>
               <div className='space-x-4'>
                 <Link href="/dashboard/deposit"><button className='btn bg-primary2'>Deposit</button></Link>
-                <Link href="#"><button className='btn'>Withdraw</button></Link>
+                <Link href="/dashboard/withdrawal"><button className='btn'>Withdraw</button></Link>
                 <Link href="#"><button className='btn inline-block'>Connect Wallet</button></Link>
               </div>
             </div>

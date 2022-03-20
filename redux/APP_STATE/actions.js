@@ -164,3 +164,27 @@ export const getVerificationCodeRequest = (email, button) => {
         })
     }
 }
+
+export const makeWithdrawRequest = (withdraw_request_data) => {
+    return (dispatch) => {
+        dispatch(setLoading(true))
+        axios.post('/api/create-withdraw-request', withdraw_request_data)
+        .then(res => {
+            if (res.data.msg) {
+                dispatch(setLoading(false))
+                dispatch(setMessage(res.data.msg))
+            }
+            if (res.data.error) {
+                dispatch(setLoading(false))
+                dispatch(setError(res.data.error))
+                dispatch(setMessage(res.data.error))
+            }
+        })
+        .catch(error => {
+            dispatch(setLoading(false))
+            dispatch(setError(res.data.error))
+            dispatch(setMessage(res.data.error))
+            // console.log('Error Occurred while making withdraw request', error)
+        })
+    }
+}

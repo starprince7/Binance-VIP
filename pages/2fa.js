@@ -71,7 +71,7 @@ export default function TwoFactorAuthentication() {
             <div className="input_field">
               <label className="block">Phone verification code</label>
               <div className="px-3 w-full border rounded-md focus-within:border-[#E18404] flex justify-between items-center">
-                <input type="number" minLength={4} name="verification_code" placeholder='Verification code' className='py-3.5 pr-3.5 w-[80%] outline-none appearance-none' />
+                <input type="number" required name="verification_code" placeholder='Verification code' className='py-3.5 pr-3.5 w-[80%] outline-none appearance-none' />
                  <span ref={getCode_ref} onClick={ getVerificationCode } className="inline-block disabled:cursor-not-allowed disabled:text-yellow-200 text-primary_dim font-semibold cursor-pointer mr-1">Get code</span> 
               </div>
             </div>

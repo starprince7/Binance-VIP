@@ -7,7 +7,7 @@ import Loader from '../../components/loader'
 import { useDispatch } from 'react-redux'
 import { setAmount } from '../../redux/APP_STATE/actions'
 
-export default function TwoFactorAuthentication() {
+export default function Deposit() {
   const router = useRouter()
   const dispatch = useDispatch()
   const formRef = useRef(null)
