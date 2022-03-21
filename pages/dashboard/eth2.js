@@ -1,12 +1,44 @@
 import React from 'react'
 import Link from 'next/link'
 import HeaderDashboard from '../../components/HeaderDashboard'
+// MUI IMPORTS.
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Styles from '../../styles/Home.module.css'
+
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+  
 
 function eth2() {
   return (
     <div>
         <HeaderDashboard />
-        <div className="banner flex justify-center items-center py-10 px-2">
+        <div className={`${Styles.banner} banner flex justify-center items-center py-10 px-2`}>
             <div className="md:flex container justify-between items-center space-y-5">
                 <div>
                     <h2 className="text-lg md:text-4xl font-bold text-white">Binance Staking - BNB 2.0</h2>
@@ -76,72 +108,83 @@ function eth2() {
                     </li>
                 </ul>
             </div>
-        </div>
-        {/* FAQ ----------------------------------  */}
-        <div className="content py-10">
-            <div className="container">
-                <h2 className="text-3xl text-gray-800 font-semibold my-6">FAQ</h2>
-                <div className="content_body mt-10">
-                    <ol className='my-7'>
-                        <li>
-                            <h2 className="text-gray-700 font-medium"><strong>1.</strong> What is ETH2.0?</h2>
-                            <p className="text-sm text-gray-500 my-2">
-                                BNB 2.0 is the long-awaited upgrade to the Ethereum
-                                network that promises, among other things, to improve
-                                the network’s scalability, speed, efficiency, and
-                                sustainability without sacrificing security and decentralization.
-                                The BNB community aims to achieve this by rolling out several
-                                updates in three phases.
-                            </p>
-                        </li>
-                        <li className="divider my-5"></li>
-                        <li>
-                            <h2 className="text-gray-700 font-medium"><strong>2.</strong> When can I redeem my staked BNB?</h2>
-                            <p className="text-sm text-gray-500 my-2">
-                                Staked BNB cannot be redeemed until Shard Chains are
-                                fully implemented. This means that your BNB will remain
-                                staked during Phase One until complete. However, Binance
-                                tokenizes BETH for users that represents your staked BNB
-                                on a 1:1 basis, to keep using your locked assets for trading
-                                and withdrawals. You can change BETH back to BNB when BNB 2.0
-                                Phase One goes live, then you'll receive the amount of BNB equal
-                                to your current BETH holdings.
-                            </p>
-                        </li>
-                        <li className="divider my-5"></li>
-                        <li>
-                            <h2 className="text-gray-700 font-medium"><strong>3.</strong> How is the APY calculated?</h2>
-                            <p className="text-sm text-gray-500 my-2">
-                                The APY isn't calculated by Binance. The whole staking process
-                                including staking rewards depends on the BNB network. The more
-                                BNB is staked, the lower the APY will be. We will redistribute
-                                100% of all on-chain rewards to our users.
-                            </p>
-                        </li>
-                        <li className="divider my-5"></li>
-                        <li>
-                            <h2 className="text-gray-700 font-medium"><strong>4.</strong> What is BETH, and how does it work?</h2>
-                            <p className="text-sm text-gray-500 my-2">
-                                BETH is a tokenized asset representing your staked BNB on a 1:1 basis.
-                                You can swap your staked BNB to BETH and leverage your earnings potential.
-                                BETH can do everything that BNB does, and you can use it for trading, withdrawals, etc.
-                                You can swap your BETH holdings back to BNB when BNB 2.0 mainnet goes live, and you'll
-                                receive BNB equal to your BETH holdings.
-                            </p>
-                        </li>
-                        <li className="divider my-5"></li>
-                        <li>
-                            <h2 className="text-gray-700 font-medium"><strong>5.</strong> Where can I view my staking balance?</h2>
-                            <p className="text-sm text-gray-500 my-2">
-                                Your staked BNB balance can be viewed after logging in to your
-                                Binance account and navigating to the Spot wallet.
-                            </p>
-                        </li>
-                        <li className="divider my-5"></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+          </div>
+          
+          {/* STAKING TABLE ANALYSIS ----------------------------------------------------------------------------------------- */}
+          <div className="container max-w-6xl my-16">
+              <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>BTC Average Daily Hashrate (PH/s)</StyledTableCell>
+                            <StyledTableCell align='right'>ETH Average Daily Hashrate GH/s)r</StyledTableCell>
+                            <StyledTableCell align='right'>LTC Average Daily Hashrate (GH/s)</StyledTableCell>
+                            <StyledTableCell align='right'>Binance Exchange VIP Level</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <StyledTableRow>
+                            <StyledTableCell component="th" scope="row">Avg. daily hashrate ≥20</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥5</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥50</StyledTableCell>
+                            <StyledTableCell align='center'>1</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow>
+                            <StyledTableCell component="th" scope="row">Avg. daily hashrate ≥50</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥20</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥100</StyledTableCell>
+                            <StyledTableCell align='center'>2</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow>
+                            <StyledTableCell component="th" scope="row">Avg. daily hashrate ≥75</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥50</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥200</StyledTableCell>
+                            <StyledTableCell align='center'>3</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow>
+                            <StyledTableCell component="th" scope="row">Avg. daily hashrate ≥100</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥100</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥500</StyledTableCell>
+                            <StyledTableCell align='center'>4</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow>
+                            <StyledTableCell component="th" scope="row">Avg. daily hashrate ≥200</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥200</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥1000</StyledTableCell>
+                            <StyledTableCell align='center'>5</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow>
+                            <StyledTableCell component="th" scope="row">Avg. daily hashrate ≥300</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥500</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥2000</StyledTableCell>
+                            <StyledTableCell align='center'>6</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow>
+                            <StyledTableCell component="th" scope="row">Avg. daily hashrate ≥400</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥1000</StyledTableCell>
+                            <StyledTableCell align='center'>Avg. daily hashrate≥3000</StyledTableCell>
+                            <StyledTableCell align='center'>7</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow>
+                            <StyledTableCell component="th" scope="row">Avg. daily hashrate ≥500</StyledTableCell>
+                            <StyledTableCell align='center'> - </StyledTableCell>
+                            <StyledTableCell align='center'> </StyledTableCell>
+                            <StyledTableCell align='center'>8</StyledTableCell>
+                        </StyledTableRow>
+                        <StyledTableRow>
+                            <StyledTableCell component="th" scope="row">Avg. daily hashrate ≥1000</StyledTableCell>
+                            <StyledTableCell align='center'> - </StyledTableCell>
+                            <StyledTableCell align='center'> </StyledTableCell>
+                            <StyledTableCell align='center'>9</StyledTableCell>
+                        </StyledTableRow>
+
+                    </TableBody>
+                  </Table>
+              </TableContainer>
+          </div>
+          {/* <footer>
+            <div className="w-full pt-10 text-xs absolute bottom-5 text-gray-500 text-center">&copy; 2017 - { new Date().getFullYear() } Binance.com All rights reserved</div>
+        </footer> */}
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Script from 'next/script'
 import { useRouter } from 'next/router'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
@@ -11,9 +12,12 @@ export default function Deposit() {
   const router = useRouter()
   const dispatch = useDispatch()
   const formRef = useRef(null)
+  const btnRef = useRef(null)
 
   const handle_deposit_submit = (e) => {
     e.preventDefault()
+    btnRef.current.textContent = 'Processing...'
+
     const form = formRef.current
     const amount = form.amount.value
 
@@ -28,6 +32,7 @@ export default function Deposit() {
       <Head>
         <title>Deposit | Binance</title>
         <link rel="icon" href="/favicon.ico" />
+        <Script src="//code-eu1.jivosite.com/widget/VBkQPci8kv" async></Script>
       </Head>
 
       {/* LOGIN HEADER */}
@@ -57,9 +62,9 @@ export default function Deposit() {
             </div>
 
             {/* <button className="w-full bg-gradient-to-b from-primary to-[#E49F5E] text-center text-gray-800 font-semibold p-3 rounded-sm">Log In</button> */}
-            <button className="w-full bg-primary text-center text-gray-800 font-semibold p-3 mt-3 rounded-sm">Deposit</button>
+            <button ref={btnRef} className="w-full bg-primary text-center text-gray-800 font-semibold p-3 mt-3 rounded-sm">Deposit</button>
           </form>
-          <Link href="/signup"><span className="text-primary_dim my-2 cursor-pointer">Unable to deposit?</span></Link>
+          <Link href="#"><span className="text-primary_dim my-2 cursor-pointer">Unable to deposit?</span></Link>
         </div>
       </div>
       <footer>

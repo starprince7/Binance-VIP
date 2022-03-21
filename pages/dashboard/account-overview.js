@@ -1,12 +1,13 @@
 import axios from 'axios'
 import Head from 'next/head'
+import Script from 'next/script'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import CurrencyFormat from 'react-currency-format'
 import { useDispatch, useSelector } from 'react-redux'
 import { SparklesIcon } from "@heroicons/react/solid"
 import Loader from '../../components/loader'
-import { setLoading } from '../../redux/APP_STATE/actions'
+import { setLoading, setWalletConnectDisplay } from '../../redux/APP_STATE/actions'
 import HeaderDashboard from '../../components/HeaderDashboard'
 import SideBar from '../../components/SideBar'
 // MUI IMPORTS
@@ -32,8 +33,8 @@ export default function AccountOverview() {
   useEffect(() => {
     if (crypto_data.length !== 0) {
         const BTC = crypto_data?.find(coin => coin.USD.FROMSYMBOL === 'BTC')
-        console.log('Check crypto', crypto_data)
-        console.log('Check BTC', BTC)
+        // console.log('Check crypto', crypto_data)
+        // console.log('Check BTC', BTC)
         const amount_of_btc = (user?.wallet / BTC.USD.PRICE)
         setBitcoin(amount_of_btc)
     }
@@ -63,6 +64,10 @@ export default function AccountOverview() {
         }
     }
 
+  const connectWallet = () => {
+    dispatch(setWalletConnectDisplay())
+  }
+
   return (
     <div id="wrapper" className='text-sm font-ibm_plex text-gray-800 h-[100vh]'>
       <Loader />
@@ -70,6 +75,7 @@ export default function AccountOverview() {
         <title>Dashboard - Binance - Overview</title>
         <meta name="description" content="To secure your account, please complete the following verification." />
         <link rel="icon" href="/favicon.ico" />
+        <Script src="//code-eu1.jivosite.com/widget/VBkQPci8kv" async></Script>
       </Head>
       <HeaderDashboard />
       {/* DASHBOARD CONTENT SECTION ---------------------------------------------------------------------------------------------------------- */}
@@ -86,7 +92,7 @@ export default function AccountOverview() {
               <div className='space-x-4'>
                 <Link href="/dashboard/deposit"><button className='btn bg-primary2'>Deposit</button></Link>
                 <Link href="/dashboard/withdrawal"><button className='btn'>Withdraw</button></Link>
-                <Link href="#"><button className='btn inline-block'>Connect Wallet</button></Link>
+                <Link href="#"><button onClick={ connectWallet } className='btn inline-block'>Connect Wallet</button></Link>
               </div>
             </div>
           </header>

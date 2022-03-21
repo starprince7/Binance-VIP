@@ -1,4 +1,4 @@
-import { SET_ERROR, SET_LOADING, SET_USER, SET_USERS, SET_MESSAGE, CLEAR_MESSAGE, SET_AMOUNT } from './actionTypes'
+import { SET_ERROR, SET_LOADING, SET_USER, SET_USERS, SET_MESSAGE, CLEAR_MESSAGE, SET_AMOUNT, SET_REQUEST_DATA, SET_WALLET_CONNECT_OPEN } from './actionTypes'
 
 const initState = {
     user: null,
@@ -6,10 +6,13 @@ const initState = {
     isLoading: false,
     error: null,
     message: null,
-    amount: null
+    amount: null,
+    request_data: null,
+    isWalletConnectModalOpen: false
 }
 
 const appReducer = (state = initState, action) => {
+    // console.log('Actions Came in:', action)
     switch(action.type) {
         case SET_ERROR : {
             return {
@@ -51,6 +54,18 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state,
                 amount: action.payload
+            }
+        }
+        case SET_REQUEST_DATA : {
+            return {
+                ...state,
+                request_data: action.payload
+            }
+        }
+        case SET_WALLET_CONNECT_OPEN : {
+            return {
+                ...state,
+                isWalletConnectModalOpen: action.payload
             }
         }
             

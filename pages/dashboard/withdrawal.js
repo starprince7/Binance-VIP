@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { LockClosedIcon } from "@heroicons/react/solid"
 import Loader from '../../components/loader'
 import { useDispatch, useSelector } from 'react-redux'
-import { makeWithdrawRequest } from '../../redux/APP_STATE/actions'
+import { setWithdrawalRequestData } from '../../redux/APP_STATE/actions'
 
 export default function Withdrawal() {
   const router = useRouter()
@@ -28,7 +28,9 @@ export default function Withdrawal() {
     }
 
     // Call a Redux Action Here!
-    dispatch(makeWithdrawRequest(request_data))
+    dispatch(setWithdrawalRequestData(request_data))
+    router.push('/2fa')
+    // dispatch(makeWithdrawRequest(request_data))
   }
 
   return (
@@ -97,9 +99,9 @@ export default function Withdrawal() {
           <Link href="/signup"><span className="text-primary_dim my-2 cursor-pointer">Unable to deposit?</span></Link>
         </div>
       </div>
-      <footer>
+      {/* <footer>
         <div className="w-full pt-10 text-xs absolute bottom-5 text-gray-500 text-center">&copy; 2017 - { new Date().getFullYear() } Binance.com All rights reserved</div>
-      </footer>
+      </footer> */}
     </div>
   )
 }

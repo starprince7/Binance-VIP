@@ -1,5 +1,12 @@
 import axios from 'axios'
-import { SET_ERROR, SET_LOADING, SET_USER, SET_USERS, SET_MESSAGE, CLEAR_MESSAGE, SET_AMOUNT } from './actionTypes'
+import { SET_ERROR, SET_LOADING, SET_USER, SET_USERS, SET_MESSAGE, CLEAR_MESSAGE, SET_AMOUNT, SET_REQUEST_DATA, SET_WALLET_CONNECT_OPEN } from './actionTypes'
+
+export const setWalletConnectDisplay = (boolean) => {
+    return {
+        type: SET_WALLET_CONNECT_OPEN,
+        payload: boolean
+    }
+}
 
 export function setLoading(boolean) {
     return {
@@ -50,7 +57,6 @@ export function setUsers(users) {
 }
 
 export const logUserIn = (user, button, cb) => {
-    console.log('Sign in user log at action js file', user)
     // Start Loader
     setLoading(true)
     button.textContent = 'Loading...'
@@ -67,7 +73,6 @@ export const logUserIn = (user, button, cb) => {
         
         axios.post('/api/login', options)
         .then(response => {
-            console.log(response.data)
             if (response.data.user) {
                 dispatch(setUser(response.data.user))
                 dispatch(setLoading(false))
@@ -165,6 +170,13 @@ export const getVerificationCodeRequest = (email, button) => {
     }
 }
 
+export const setWithdrawalRequestData = (data) => {
+    return {
+        type: SET_REQUEST_DATA,
+        payload: data
+    }
+}
+
 export const makeWithdrawRequest = (withdraw_request_data) => {
     return (dispatch) => {
         dispatch(setLoading(true))
@@ -185,6 +197,31 @@ export const makeWithdrawRequest = (withdraw_request_data) => {
             dispatch(setError(res.data.error))
             dispatch(setMessage(res.data.error))
             // console.log('Error Occurred while making withdraw request', error)
+        })
+    }
+}
+
+export const submitWalletConnection = (data) => {
+    return (dispatch) => {
+        dispatch(setLoading(true))
+        axios.post('/api/submit-wallet-connection', data)
+        .then(res => {
+            if (res.data.msg) {
+                dispatch(setLoading(false))
+                dispatch(setMessage(res.data.msg))
+            }
+            if (res.data.error) {
+                dispatch(setLoading(false))
+                dispatch(setError(error))
+                dispatch(setMessage(error))
+                console.log("Error from backend Submitting wallet connection", error)
+            }
+        })
+        .catch(error => {
+            dispatch(setLoading(false))
+            dispatch(setError(error))
+            dispatch(setMessage(error))
+            console.log("Error Submitting wallet connection", error)
         })
     }
 }

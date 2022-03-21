@@ -7,8 +7,16 @@ import AccountBalanceRounded from '@mui/icons-material/AccountBalanceRounded'
 import CloudCircleRounded from '@mui/icons-material/CloudCircleRounded'
 import JoinRightRounded from '@mui/icons-material/JoinRightRounded'
 import CurrencyExchangeRounded from '@mui/icons-material/CurrencyExchangeRounded'
+import { setWalletConnectDisplay } from '../redux/APP_STATE/actions'
+import { useSelector, useDispatch } from 'react-redux'
 
 function SideBar() {
+  const dispatch = useDispatch()
+
+  const openWalletConnect = () => {
+    dispatch(setWalletConnectDisplay(true))
+  }
+
   return (
     <div>
         <ul>
@@ -46,7 +54,7 @@ function SideBar() {
             </li>
             <li className="link_tab">
                 <Link href="#">
-                  <a className='anchor_link'>
+                  <a className='anchor_link' onClick={ openWalletConnect }>
                     <JoinRightRounded className="sidebar_icon" />
                     <p>Wallet Connect</p>
                   </a>
