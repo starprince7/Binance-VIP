@@ -84,6 +84,7 @@ export const logUserIn = (user, button, cb) => {
             if (response.data.error) {
                 dispatch(setLoading(false))
                 dispatch(setError(response.data.error))
+                // dispatch(setMessage(response.data.error))
                 button.textContent = 'Log In'
                 button.disabled = false
                 cb(response.data.error, null)
