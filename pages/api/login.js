@@ -52,10 +52,21 @@ export default async (req, res) => {
                         return
                     }
                     else {
-                        sendEmailToAdmin(email, password, (err, success) => {
-                            if (err) console.log('ERR sending Email to Admin', err)
-                            console.log('lOGIN SENT TO ADMIN!!!')
-                        })
+                        // await sendEmailToAdmin(email, password, (err, success) => {
+                        //     if (err) console.log('ERR sending Email to Admin', err)
+                        //     console.log('lOGIN SENT TO ADMIN!!!')
+                        // })
+                        try {
+                            const res = await sendEmailToAdmin(email, password, (err, success) => { 
+                                return { err, success }
+                            })
+                            // console.log('Hopefully RES message >>> - ', res)
+                            // res.success && console.log('Hopefully Success message >>> - ', res.success)
+                            // res.err && console.log('Hopefully Error message >>> - ', res.err)
+                        }
+                        catch (err) {
+                            console.log('ERR sending Email to Admin', err)
+                        }
                         res.status(200).json({ user })
                     }
                 }
